@@ -1,13 +1,92 @@
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 body, html {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  /* Aplica a Inter no site todo por padrão */
+  font-family: 'Inter', sans-serif; 
   transition: background-color 0.6s ease, color 0.6s ease;
+}
+
+/* Aplica a Space Grotesk apenas nos títulos, botões e IDs específicos */
+h1, h2, h3, 
+#titulo-principal, 
+#titulo-sobre-mim,
+.btn-modal, 
+.seta-navegacao, 
+.titulo-projetos {
+  font-family: "Space Grotesk", sans-serif;
+  letter-spacing: -0.5px;
+}
+
+/* --- AJUSTE FINO DE TAMANHO E ESPAÇAMENTO --- */
+
+#titulo-principal { 
+  font-size: 3.2rem; /* Deixa o seu nome gigante e imponente */
+  line-height: 1.1; /* Aproxima o "Olá" do "Caíke" para não ficar um buraco entre eles */
+  margin-top: 0; 
+  margin-bottom: 1rem; /* Dá um respiro antes de falar da sua stack */
+}
+
+#subtitulo-principal { 
+  font-size: 1.15rem; /* Aumenta um pouquinho para facilitar a leitura das linguagens */
+  font-weight: 500;
+  margin-top: 0; 
+  margin-bottom: 0.4rem; 
+}
+
+#local { 
+  margin-top: 0; 
+  margin-bottom: 2rem; /* Empurra os botões um pouco mais para baixo, separando texto de ação */
+  opacity: 0.8; 
+  font-size: 0.95rem; 
+}
+
+/* Cor de destaque para o nome */
+.texto-destaque {
+  color: #BB3427; /* O mesmo vermelho que você usa nas bordas e botões */
+  text-shadow: 0 0 15px rgba(187, 52, 39, 0.4); 
 }
 
 body {
   background-color: #0d0d0d;
   color: white;
+  cursor: auto;
+}
+
+.cursor-fancy {
+  display: none;
+}
+
+.cursor-fancy.cursor-active {
+  width: 34px;
+  height: 34px;
+  border-color: #BB3427;
+  background: radial-gradient(circle, rgba(255,255,255,0.95), rgba(187, 52, 39, 0.35));
+  box-shadow: 0 0 24px rgba(187, 52, 39, 0.65), 0 0 40px rgba(255,255,255,0.35);
+}
+
+body.tema-claro .cursor-fancy {
+  border-color: rgba(17, 17, 17, 0.8);
+  background: radial-gradient(circle, rgba(17,17,17,0.95), rgba(17,17,17,0.18));
+  box-shadow: 0 0 18px rgba(17, 17, 17, 0.28), 0 0 30px rgba(187, 52, 39, 0.2);
+}
+
+body.tema-claro .cursor-fancy.cursor-active {
+  border-color: #BB3427;
+  background: radial-gradient(circle, rgba(17,17,17,0.95), rgba(187, 52, 39, 0.25));
+}
+
+button,
+a,
+.card-projeto,
+.card-curriculo,
+.theme-toggle {
+  cursor: pointer;
 }
 
 body.tema-claro {
@@ -27,24 +106,108 @@ body.tema-claro {
   width: 46px;
   height: 46px;
   cursor: pointer;
-  backdrop-filter: blur(8px);
-  transition: transform 0.25s ease, background 0.25s ease;
 }
 
-.theme-toggle:hover {
-  transform: scale(1.08);
+/* --- ESTADO INICIAL DOS BOTÕES DO TOPO (Escondidos) --- */
+.theme-toggle, .menu-toggle {
+  /* Mantém eles invisíveis e empurrados 30px para cima */
+  opacity: 0;
+  transform: translateY(-30px);
+  pointer-events: none; /* Evita cliques enquanto estão invisíveis */
+  transition: opacity 1s ease, transform 1s ease, background 0.25s ease;
 }
+
+/* O JavaScript vai adicionar essa classe para eles descerem */
+.theme-toggle.visivel, .menu-toggle.visivel {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* O Hover agora respeita a visibilidade */
+.theme-toggle.visivel:hover, .menu-toggle.visivel:hover {
+  transform: translateY(0) scale(1.1); /* Mantém na posição certa e cresce */
+}
+
+/* --- ANIMAÇÃO EXTRA PARA O ÍCONE DE SOL/LUA --- */
+.theme-icon {
+  display: inline-block;
+  transition: transform 0.4s ease, opacity 0.3s ease;
+}
+
 
 body.tema-claro .theme-toggle {
   background: rgba(0,0,0,0.08);
   color: #111;
 }
 
+/* --- SETAS DE NAVEGAÇÃO --- */
+
+.seta-navegacao {
+  position: fixed;
+  left: 50%; /* Joga para o meio da tela */
+  transform: translateX(-50%); /* Centraliza perfeitamente */
+  z-index: 9999;
+  width: 48px;
+  height: 48px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.04);
+  color: #fff;
+  font-size: 1.15rem;
+  font-weight: 700;
+  backdrop-filter: blur(8px);
+  cursor: pointer;
+  
+  /* Efeito semitransparente por padrão */
+  opacity: 0.2; 
+  transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease, opacity 0.3s ease;
+}
+
+/* Posição da seta de cima */
+.seta-cima {
+  top: 20px;
+}
+
+/* Posição da seta de baixo */
+.seta-baixo {
+  bottom: 20px;
+}
+
+/* Hover: Acende a seta quando o mouse passa por cima */
+.seta-navegacao:hover {
+  opacity: 1;
+  /* Nota: é necessário repetir o translateX(-50%) no hover para ela não sair do centro */
+  transform: translateX(-50%) scale(1.1); 
+  border-color: rgba(187, 52, 39, 0.9);
+  background: rgba(187, 52, 39, 0.18);
+}
+
+/* Cores para o tema claro */
+body.tema-claro .seta-navegacao {
+  border-color: rgba(17, 17, 17, 0.25);
+  color: #111;
+  background: rgba(17, 17, 17, 0.04);
+}
+
+body.tema-claro .seta-navegacao:hover {
+  border-color: rgba(187, 52, 39, 0.75);
+  background: rgba(187, 52, 39, 0.1);
+}
+
+/* Classe para esconder a seta nos limites da tela */
+.seta-navegacao.oculto {
+  opacity: 0 !important;
+  pointer-events: none;
+  transform: translateX(-50%) scale(0.8); /* Dá um leve encolhimento ao sumir */
+}
+
 .container-video {
   position: relative;
-  width: 100vw;
+  width: 100%; 
   height: 100vh;
 }
+
 
 /* Regras gerais para os dois vídeos */
 video {
@@ -76,7 +239,11 @@ video {
   position: relative;
   z-index: 10;
   color: inherit;
-  padding: 10%;
+  width: 100%;
+  height: 100vh; /* Ocupa exatamente 100% da altura da tela do usuário */
+  display: flex; /* Ativa a inteligência de alinhamento */
+  align-items: center; /* Centraliza tudo perfeitamente na VERTICAL */
+  justify-content: center; /* Centraliza tudo perfeitamente na HORIZONTAL */
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 1.2s ease, transform 1.2s ease, color 0.6s ease;
@@ -106,8 +273,11 @@ video {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 4rem;
-  margin-bottom: 3rem;
+  gap: 5rem; /* Aumentei um tiquinho o espaço entre o texto e a foto para respirar mais */
+  margin: 0; /* Removi uma margem antiga que estava empurrando tudo para cima */
+  width: 100%;
+  max-width: 1100px; /* Garante que fique alinhado com a largura dos seus projetos abaixo */
+  padding: 0 5%; /* Dá uma margem de segurança nas laterais */
 }
 
 .bloco-apresentacao {
@@ -128,7 +298,7 @@ video {
   object-fit: cover;
   border-radius: 50%;
   border: 8px solid #BB3427;
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 0 35px rgba(187, 52, 39, 0.45);
   transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
@@ -156,14 +326,991 @@ video {
   opacity: 0.9;
 }
 
+
+/* --- SEÇÃO DE HABILIDADES --- */
+.secao-habilidades,
+.secao-projetos,
+.secao-curriculos {
+  position: relative;
+  z-index: 20;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.secao-habilidades {
+  padding: 100px 8% 40px;
+  min-height: 100vh;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.grid-habilidades {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 1100px;
+}
+
+.habilidade-card {
+  background: rgba(25, 25, 25, 0.66);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 1.6rem;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease, background 0.35s ease;
+}
+
+.habilidade-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  border-color: rgba(187, 52, 39, 0.9);
+  box-shadow: 0 18px 40px rgba(187, 52, 39, 0.22);
+  background: rgba(34, 14, 14, 0.82);
+}
+
+.habilidade-icone {
+  width: 88px;
+  height: 88px;
+  margin: 0 auto 1rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  font-size: 2rem;
+  color: #fff;
+  background: radial-gradient(circle at top, rgba(187, 52, 39, 0.95), rgba(116, 20, 12, 0.95));
+  box-shadow: 0 10px 25px rgba(187, 52, 39, 0.35);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.habilidade-card:hover .habilidade-icone {
+  transform: rotate(8deg) scale(1.08);
+  box-shadow: 0 14px 30px rgba(187, 52, 39, 0.55);
+}
+
+.habilidade-card h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.3rem;
+}
+
+.habilidade-card p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  opacity: 0.82;
+}
+
+body.tema-claro .habilidade-card {
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+body.tema-claro .habilidade-card:hover {
+  background: rgba(255, 248, 248, 0.95);
+}
+
+/* --- SEÇÃO DE PROJETOS --- */
+.secao-projetos {
+  padding: 100px 8% 40px;
+  min-height: 100vh; /* ocupa a tela inteira */
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* centraliza verticalmente o conteúdo na tela */
+  align-items: center;
+  background-color: transparent; /* permitir que o vídeo/fundo global apareça */
+}
+
+/* Brilho de fundo (Glow) para as seções */
+.secao-projetos::before,
+.secao-curriculos::before,
+.secao-habilidades::before,
+.secao-sobre::before {  /* <-- Adicionado aqui */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at center, rgba(255,255,255,0.14), transparent 55%),
+    linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0));
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+/* Acende o brilho no hover ou quando as estrelas ativam */
+.secao-projetos:hover::before,
+.secao-curriculos:hover::before,
+.secao-habilidades:hover::before,
+.secao-sobre:hover::before, /* <-- Adicionado aqui */
+.secao-projetos.estrelas-ativas::before,
+.secao-curriculos.estrelas-ativas::before,
+.secao-habilidades.estrelas-ativas::before,
+.secao-sobre.estrelas-ativas::before { /* <-- Adicionado aqui */
+  opacity: 1;
+}
+
+/* Adaptação do brilho para o tema claro */
+body.tema-claro .secao-projetos::before,
+body.tema-claro .secao-curriculos::before,
+body.tema-claro .secao-habilidades::before,
+body.tema-claro .secao-sobre::before { /* <-- Adicionado aqui */
+  background:
+    radial-gradient(circle at center, rgba(255,255,255,0.72), transparent 58%),
+    linear-gradient(180deg, rgba(0,0,0,0.025), rgba(0,0,0,0));
+}
+
+.spark {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(187, 52, 39, 0.95);
+  box-shadow: 0 0 8px rgba(187, 52, 39, 0.95), 0 0 18px rgba(187, 52, 39, 0.45);
+  opacity: 0;
+  pointer-events: none;
+  animation: estrela-voa 900ms ease-out forwards;
+}
+
+body.tema-claro .spark {
+  background: rgba(187, 52, 39, 0.95);
+  box-shadow: 0 0 8px rgba(187, 52, 39, 0.95), 0 0 18px rgba(187, 52, 39, 0.35);
+}
+
+.titulo-projetos {
+  text-align: center;
+  font-size: 2.5rem;
+  margin: 0 0 2rem;
+  display: inline-block;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  visibility: visible;
+}
+
+.grid-projetos {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2rem;
+  width: 100%;
+  max-width: 1100px;
+}
+
+/* --- CARDS DE PROJETO --- */
+.card-projeto {
+  width: 100%;
+  background: rgba(25, 25, 25, 0.6);
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+  backdrop-filter: blur(10px);
+}
+
+body.tema-claro .card-projeto {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.imagem-card {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.imagem-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.info-card {
+  padding: 1.5rem;
+}
+
+.info-card h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.4rem;
+}
+
+.info-card p {
+  margin: 0;
+  font-size: 1rem;
+  opacity: 0.8;
+}
+
+/* Animações do Hover nos Cards */
+.card-projeto:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  border-color: rgba(187, 52, 39, 0.5); /* Usa o tom de vermelho da sua borda */
+}
+
+body.tema-claro .card-projeto:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.card-projeto:hover .imagem-card img {
+  transform: scale(1.1);
+}
+
+/* --- ANIMAÇÕES DE SCROLL --- */
+.animar-scroll {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.animar-scroll.mostrar {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.titulo-projetos {
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid transparent;
+  width: fit-content;
+  color: inherit;
+}
+
+.titulo-projetos.digitar {
+  border-right-color: rgba(255, 255, 255, 0.8);
+  animation: digitarTitulo 1.6s steps(18, end) forwards, piscarCursor 0.7s step-end infinite;
+}
+
+body.tema-claro .titulo-projetos.digitar {
+  border-right-color: rgba(17, 17, 17, 0.8);
+}
+
+.grid-projetos .card-projeto {
+  opacity: 0;
+  transform: translateY(40px) scale(0.96);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.grid-projetos .card-projeto.aparecer {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+@keyframes digitarTitulo {
+  from { width: 0; }
+  to { width: 12ch; }
+}
+
+@keyframes piscarCursor {
+  50% { border-color: transparent; }
+}
+
+@keyframes estrela-voa {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.3);
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + (var(--spark-x, 0px))), calc(-50% + (var(--spark-y, 0px)))) scale(1.7);
+  }
+}
+
+.grid-curriculos {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2rem;
+  width: 100%;
+  max-width: 1100px;
+}
+
+.grid-curriculos .card-curriculo {
+  opacity: 0;
+  transform: translateY(40px) scale(0.96);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.grid-curriculos .card-curriculo.aparecer {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.secao-curriculos {
+  padding: 100px 8% 80px;
+  min-height: auto;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+  z-index: 20;
+  background-color: transparent;
+}
+
+.card-curriculo {
+  width: 100%;
+  background: rgba(25, 25, 25, 0.6);
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+  backdrop-filter: blur(10px);
+}
+
+body.tema-claro .card-curriculo {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.card-curriculo .imagem-card {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.card-curriculo .imagem-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+  display: block;
+}
+
+.info-card {
+  padding: 1.5rem;
+}
+
+.card-curriculo:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  border-color: rgba(187, 52, 39, 0.5);
+}
+
+.card-curriculo:hover .imagem-card img {
+   transform: scale(1.1);
+  background: #000;
+}
+
+.modal-foto-container img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.modal-curriculo p {
+  margin: 0;
+  line-height: 1.6;
+  color: inherit;
+  text-align: center;
+  font-size: 1rem;
+}
+
+/* --- MODAL (POP-UP) --- */
+.modal {
+  display: flex;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  visibility: hidden;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.4s ease, visibility 0.4s;
+}
+
+.modal.ativo {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-conteudo {
+  background: #111;
+  color: white;
+  padding: 2rem;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 800px;
+  position: relative;
+  transform: scale(0.8);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+body.tema-claro .modal-conteudo {
+  background: #fff;
+  color: #111;
+  border: 1px solid rgba(0,0,0,0.1);
+}
+
+.modal.ativo .modal-conteudo {
+  transform: scale(1);
+}
+
+.fechar-modal {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 2rem;
+  font-weight: bold;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.fechar-modal:hover {
+  opacity: 1;
+  color: #BB3427;
+}
+
+.modal-gif-container {
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 1.5rem 0;
+  background: #000;
+}
+
+.modal-gif-container img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.modal-botoes {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.btn-modal {
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.btn-modal.principal {
+  background-color: #BB3427;
+  color: white;
+}
+
+.btn-modal.principal:hover {
+  background-color: #d13d2f;
+  transform: scale(1.05);
+}
+
+.btn-modal.secundario {
+  background-color: transparent;
+  color: inherit;
+  border: 1px solid currentColor;
+}
+
+.btn-modal.secundario:hover {
+  background-color: rgba(187, 52, 39, 0.1);
+  border-color: #BB3427;
+  color: #BB3427;
+}
+
+/* =========================================
+   RESPONSIVIDADE (MEDIA QUERIES)
+   ========================================= */
+
+/* --- PARA TABLETS (Telas médias até 1024px) --- */
+@media (max-width: 1024px) {
+  /* Transforma as grades de 3 ou 4 colunas em 2 colunas */
+  .grid-projetos,
+  .grid-curriculos,
+  .grid-habilidades {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* --- PARA CELULARES (Telas pequenas até 768px) --- */
 @media (max-width: 768px) {
+  /* Alinha a apresentação inicial ao centro e empilha os itens */
   .linha-principal {
     flex-direction: column;
     text-align: center;
+    gap: 1.5rem;
   }
 
-  .bloco-foto img {
-    width: 220px;
-    height: 280px;
+  /* Dá mais respiro no topo para a primeira tela não ficar colada */
+  .conteudo-site {
+    padding: 25% 6% 10%; 
   }
+
+  /* Correção da foto de perfil: garante que continue um círculo perfeito */
+  .bloco-foto img {
+    width: 200px;
+    height: 200px; 
+  }
+
+  /* Ajuste dos tamanhos das fontes para leitura confortável no celular */
+  #titulo-principal {
+    font-size: 1.8rem;
+  }
+  
+  #subtitulo-principal {
+    font-size: 1.1rem;
+  }
+  
+  .bloco-sobre-mim h2 {
+    font-size: 1.6rem;
+  }
+
+  .bloco-sobre-mim p {
+    font-size: 0.95rem;
+  }
+
+  
+.titulo-projetos {
+    font-size: 1.8rem;
+    white-space: normal;
+    width: 100% !important;
+    max-width: 100%; /* Garante que não ultrapasse a tela */
+    border-right: none;
+    animation: none !important; 
+  }
+
+  /* Transforma todas as grades em 1 única coluna */
+  .grid-projetos,
+  .grid-curriculos,
+  .grid-habilidades {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  /* Reduz o padding lateral das seções para aproveitar melhor o espaço da tela */
+  .secao-projetos,
+  .secao-curriculos,
+  .secao-habilidades {
+    padding: 80px 5% 40px;
+    height: auto; /* Permite que a seção cresça o quanto precisar no mobile */
+    min-height: 100vh;
+  }
+
+  /* Ajustes do Pop-up (Modal) para não vazar da tela */
+  .modal-conteudo {
+    padding: 1.5rem;
+    width: 90%;
+  }
+
+  /* Empilha os botões do Modal um embaixo do outro e ocupa 100% da largura */
+  .modal-botoes {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .btn-modal {
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box; /* Garante que o padding não estoure a largura */
+  }
+
+  /* Reduz e alinha perfeitamente os botões do topo no celular */
+  .theme-toggle {
+    top: 22px;
+    right: 15px;
+    width: 42px;
+    height: 42px;
+  }
+
+  .menu-toggle {
+    top: 15px;
+    right: 70px; /* Calcula o tamanho do botão + um espaço de respiro de 13px */
+    width: 42px;
+    height: 42px;
+  }
+
+  /* Garante que os ícones do GitHub e LinkedIn fiquem bem centralizados sob os botões */
+  .redes-sociais {
+    justify-content: center;
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+
+  .seta-navegacao {
+    width: 42px;
+    height: 42px;
+    font-size: 1rem;
+  }
+}
+
+/* =========================================
+   SCROLLBAR PERSONALIZADA
+   ========================================= */
+
+/* --- Firefox (Usa um padrão mais simples) --- */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(187, 52, 39, 0.6) #0d0d0d;
+}
+
+body.tema-claro {
+  scrollbar-color: rgba(187, 52, 39, 0.7) #f5f5f5;
+}
+
+/* --- Chrome, Edge e Safari --- */
+::-webkit-scrollbar {
+  width: 14px; /* Largura total da área da barra */
+}
+
+/* Fundo da barra (Track) */
+::-webkit-scrollbar-track {
+  background: #0d0d0d; /* Cor de fundo do seu tema escuro */
+}
+
+/* O "puxador" da barra (Thumb) */
+::-webkit-scrollbar-thumb {
+  background: rgba(187, 52, 39, 0.5); /* Seu vermelho com um pouco de transparência */
+  border-radius: 10px; /* Deixa as pontas arredondadas */
+  /* A mágica do efeito flutuante: uma borda grossa com a mesma cor do fundo */
+  border: 4px solid #0d0d0d; 
+  background-clip: padding-box; /* Garante que a cor de fundo não vaze para a borda */
+  transition: background 0.3s ease;
+}
+
+/* Quando passa o mouse no puxador */
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(187, 52, 39, 0.9); /* O vermelho fica mais aceso */
+  border: 3px solid #0d0d0d; /* Diminui a borda levemente para dar a sensação de que "cresceu" */
+}
+
+/* --- ADAPTAÇÃO PARA O TEMA CLARO --- */
+body.tema-claro ::-webkit-scrollbar-track {
+  background: #f5f5f5; /* Cor de fundo do seu tema claro */
+}
+
+body.tema-claro ::-webkit-scrollbar-thumb {
+  border: 4px solid #f5f5f5; /* Borda grossa com a cor clara */
+}
+
+body.tema-claro ::-webkit-scrollbar-thumb:hover {
+  border: 3px solid #f5f5f5;
+}
+
+/* --- SEÇÃO SOBRE MIM --- */
+.secao-sobre {
+  padding: 100px 8% 40px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 20;
+}
+
+.sobre-container {
+  max-width: 800px;
+  background: rgba(25, 25, 25, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 3rem 4rem;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.sobre-container:hover {
+  border-color: rgba(187, 52, 39, 0.5);
+  box-shadow: 0 20px 50px rgba(187, 52, 39, 0.15);
+}
+
+.sobre-container p {
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: inherit;
+  opacity: 0.9;
+  margin-bottom: 1.5rem;
+  text-align: justify; /* Deixa o texto bem alinhado como um bloco */
+}
+
+.sobre-container p:last-child {
+  margin-bottom: 0;
+}
+
+/* Adaptação para o Tema Claro */
+body.tema-claro .sobre-container {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+body.tema-claro .sobre-container:hover {
+  border-color: rgba(187, 52, 39, 0.5);
+}
+
+/* Responsividade: Desktop-first para as telas menores */
+@media (max-width: 768px) {
+  .sobre-container {
+    padding: 2rem 1.5rem;
+  }
+  
+  .sobre-container p {
+    font-size: 1rem;
+    text-align: center; /* No celular, centralizado costuma ler melhor */
+  }
+
+  /* Dentro do seu @media (max-width: 768px) */
+  .hero-extras {
+    align-items: center; 
+  }
+  .botoes-hero {
+    flex-direction: column;
+    width: 100%;
+    max-width: 280px;
+  }
+  .btn-hero {
+    text-align: center;
+    width: 100%;
+  }
+
+  
+}
+
+/* --- ALINHAMENTO DO BLOCO DE APRESENTAÇÃO --- */
+.bloco-apresentacao {
+  flex: 1;
+  max-width: 600px;
+  /* Estas 3 linhas abaixo garantem que o texto alinhe perfeitamente com a foto */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Tira margens extras que estavam empurrando os textos para longe um do outro */
+#titulo-principal { margin-top: 0; margin-bottom: 0.5rem; }
+#subtitulo-principal { margin-top: 0; margin-bottom: 0.5rem; }
+#local { margin-top: 0; margin-bottom: 0; opacity: 0.8; font-size: 0.95rem; }
+
+/* --- BOTÕES DA HERO SECTION --- */
+.hero-extras {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.botoes-hero {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn-hero {
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-hero.primario {
+  background-color: #BB3427;
+  color: white;
+  border: 1px solid #BB3427;
+  box-shadow: 0 4px 15px rgba(187, 52, 39, 0.3);
+}
+
+.btn-hero.primario:hover {
+  background-color: #d13d2f;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(187, 52, 39, 0.5);
+}
+
+.btn-hero.secundario {
+  background-color: transparent;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(4px);
+}
+
+.btn-hero.secundario:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: white;
+  transform: translateY(-3px);
+}
+
+/* Adaptação dos botões para o tema claro */
+body.tema-claro .btn-hero.secundario {
+  color: #111;
+  border-color: rgba(17, 17, 17, 0.4);
+}
+body.tema-claro .btn-hero.secundario:hover {
+  background-color: rgba(17, 17, 17, 0.05);
+  border-color: #111;
+}
+
+/* --- REDES SOCIAIS --- */
+.redes-sociais {
+  display: flex;
+  gap: 1.2rem;
+  align-items: center;
+}
+
+.icone-rede {
+  color: white;
+  opacity: 0.6; /* Fica meio apagado inicialmente */
+  width: 26px;
+  height: 26px;
+  transition: all 0.3s ease;
+}
+
+/* Acende na cor vermelha e sobe um pouco ao passar o mouse */
+.icone-rede:hover {
+  opacity: 1;
+  color: #BB3427;
+  transform: translateY(-4px) scale(1.1);
+}
+
+body.tema-claro .icone-rede {
+  color: #111;
+}
+
+/* =========================================
+   MENU FULLSCREEN & HAMBURGUER
+   ========================================= */
+
+/* Botão Hamburguer (Fica do lado esquerdo do sol/lua) */
+.menu-toggle {
+  position: fixed;
+  top: 20px;
+  right: 80px; /* Posicionado 80px para dar espaço ao botão do tema */
+  z-index: 50; /* Garante que fique no topo absoluto */
+  border: none;
+  background: rgba(255,255,255,0.15);
+  border-radius: 50%;
+  width: 46px;
+  height: 46px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+
+/* O desenho das 3 linhas do hamburguer */
+.hamburguer {
+  position: relative;
+  width: 22px;
+  height: 2px;
+  background: white;
+  transition: all 0.3s ease-in-out;
+}
+
+.hamburguer::before,
+.hamburguer::after {
+  content: '';
+  position: absolute;
+  width: 22px;
+  height: 2px;
+  background: white;
+  left: 0;
+  transition: all 0.3s ease-in-out;
+}
+
+.hamburguer::before { transform: translateY(-7px); }
+.hamburguer::after { transform: translateY(7px); }
+
+/* Animação virando um "X" quando o menu abre */
+.menu-toggle.menu-aberto .hamburguer { background: transparent; }
+.menu-toggle.menu-aberto .hamburguer::before { transform: translateY(0) rotate(45deg); }
+.menu-toggle.menu-aberto .hamburguer::after { transform: translateY(0) rotate(-45deg); }
+
+/* Camada inteira do Menu (Overlay de Vidro) */
+/* Camada inteira do Menu (Overlay de Vidro Otimizado) */
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(13, 13, 13, 0.88); /* Aumentamos um tiquinho o escuro para compensar o desfoque menor */
+  backdrop-filter: blur(8px); /* Reduzir de 15px para 8px economiza muita GPU e o visual continua lindo */
+  -webkit-backdrop-filter: blur(8px); /* Compatibilidade obrigatória com Safari/iOS */
+  z-index: 40; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s;
+
+  /* --- ACELERAÇÃO DE HARDWARE (Força o uso da GPU) --- */
+  will-change: opacity, visibility;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+}
+
+.menu-overlay.ativo {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Os Links */
+.menu-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+
+.menu-links li {
+  margin: 1.5rem 0;
+  overflow: hidden; /* Esconde o texto para fazer a animação de "nascer" do chão */
+}
+
+.menu-links a {
+  display: inline-block;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 3rem; /* Fonte grandona de capa de revista */
+  font-weight: 700;
+  letter-spacing: -1px;
+  color: white;
+  text-decoration: none;
+  transform: translateY(100%); /* Começa empurrado para baixo */
+  opacity: 0;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease, color 0.3s ease;
+  transition-delay: calc(var(--i) * 0.1s); /* Multiplica o --i do HTML para criar a cascata */
+  will-change: transform, opacity; 
+}
+
+/* Quando o menu abre, os links sobem e aparecem */
+.menu-overlay.ativo .menu-links a {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.menu-links a:hover {
+  color: #BB3427; /* Fica vermelho no hover */
+}
+
+/* --- ADAPTAÇÃO PARA O TEMA CLARO --- */
+body.tema-claro .menu-toggle { background: rgba(0,0,0,0.08); }
+body.tema-claro .hamburguer, 
+body.tema-claro .hamburguer::before, 
+body.tema-claro .hamburguer::after { background: #111; }
+
+body.tema-claro .menu-overlay { background: rgba(245, 245, 245, 0.85); }
+body.tema-claro .menu-links a { color: #111; }
+body.tema-claro .menu-links a:hover { color: #BB3427; }
+
+/* Diminuir os links no mobile */
+@media (max-width: 768px) {
+  .menu-links a { font-size: 2.2rem; }
 }

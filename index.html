@@ -3,14 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Portfólio | Caike</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
+    <link rel="shortcut icon" href="gemini-svg.svg" type="favicon.sgv">
 </head>
 <body>
+   <div class="cursor-fancy" aria-hidden="true"></div>
    <button id="theme-toggle" class="theme-toggle" aria-label="Alternar tema" title="Alternar tema">
     <span class="theme-icon">☀️</span>
   </button>
+
+  <button id="menu-toggle" class="menu-toggle" aria-label="Abrir menu">
+     <span class="hamburguer"></span>
+   </button>
+
+   <!-- 2. NOVO: Tela do Menu -->
+   <nav id="menu-overlay" class="menu-overlay">
+     <ul class="menu-links">
+       <!-- O style="--i: X" serve para criarmos a animação em cascata (um após o outro) no CSS -->
+       <li style="--i: 1;"><a href="#" class="link-menu">Início</a></li>
+       <li style="--i: 2;"><a href="#sobre" class="link-menu">Sobre mim</a></li>
+       <li style="--i: 3;"><a href="#projetos" class="link-menu">Meus Projetos</a></li>
+       <li style="--i: 4;"><a href="#curriculos" class="link-menu">Certificados</a></li>
+       <li style="--i: 5;"><a href="#habilidades" class="link-menu">Habilidades</a></li>
+     </ul>
+   </nav>
 
    <div class="container-video">
   <video id="video-intro" src="Formas Vermelhas Pretas Minimali… 202607131159.mp4" muted playsinline autoplay ></video>
@@ -20,22 +43,268 @@
   
   <div class="conteudo-site" id="conteudo-principal">
     <div class="linha-principal">
+      <!-- Devolvendo a classe bloco-apresentacao -->
       <div class="bloco-apresentacao">
         <h1 id="titulo-principal"></h1>
         <p id="subtitulo-principal"></p>
+        <p id="local"></p>
+        
+        <div class="hero-extras" id="hero-extras">
+          <div class="botoes-hero">
+            <a href="#projetos" class="btn-hero primario">Ver Meus Projetos</a>
+            <a href="https://github.com/caike-santos" target="_blank" rel="noopener noreferrer" class="btn-hero secundario">Meu GitHub</a>
+          </div>
+          
+          <div class="redes-sociais">
+            <a href="https://www.linkedin.com/in/caike-dev/" target="_blank" class="icone-rede" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            </a>
+            <a href="https://github.com/caike-santos" target="_blank" class="icone-rede" aria-label="GitHub">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            </a>
+          </div>
+        </div>
       </div>
+
+      <!-- Devolvendo a classe bloco-foto -->
       <div class="bloco-foto">
         <a href="https://github.com/caike-santos" target="_blank" rel="noopener noreferrer">
           <img src="Captura de tela 2026-07-13 140306.png" alt="Foto de perfil" />
         </a>
       </div>
     </div>
-
-    <div class="bloco-sobre-mim">
-      <h2 id="titulo-sobre-mim"></h2>
-      <p id="texto-sobre-mim"></p>
-    </div>
+    
   </div>
 </div>
+
+<section id="sobre" class="secao-sobre">
+
+    <div class="sobre-container animar-scroll">
+
+      <h2 class="titulo-projetos">Sobre mim</h2>
+
+      <p>
+
+        Olá! Meu nome é Caike, sou estudante do 3º período de Análise e Desenvolvimento de Sistemas na FAETERJ-Rio / FAETEC. Sou apaixonado por tecnologia e focado na criação de soluções eficientes, com experiência prática no desenvolvimento de sistemas utilizando Java, PHP, JavaScript, HTML/CSS, C e bancos de dados como MySQL.
+
+      </p>
+
+      <p>
+
+        Atualmente, busco uma oportunidade de estágio no Rio de Janeiro, onde eu possa colaborar com projetos reais, aplicar meus conhecimentos em desenvolvimento e continuar evoluindo profissionalmente.
+
+      </p>
+
+    </div>
+
+  </section>
+
+<section id="projetos" class="secao-projetos">
+    <h2 class="titulo-projetos">Meus Projetos</h2>
+    
+    <div class="grid-projetos">
+      
+      <div class="card-projeto animar-scroll" 
+           data-titulo="Sistema Fogo & Brasa" 
+           data-gif="restaurantegif.gif" 
+           data-site="https://caike-santos.github.io/Projeto-restaurante/cardapio.html" 
+           data-github="https://github.com/caike-santos/Projeto-restaurante">
+        
+        <div class="imagem-card">
+          <img src="restaurante.png" alt="Capa Fogo e Brasa">
+        </div>
+        <div class="info-card">
+          <h3>Sistema Fogo & Brasa</h3>
+          <p>Sistema de gestão para restaurantes.</p>
+        </div>
+      </div>
+
+      <div class="card-projeto animar-scroll" 
+           data-titulo="App Clínica Veterinária" 
+           data-gif="vetgif.gif" 
+           data-site="https://link-do-site.com" 
+           data-github="https://github.com/caike-santos/Projeto-veterinaria-JavaFx">
+        
+        <div class="imagem-card">
+          <img src="vet.png" alt="Capa Clínica">
+        </div>
+        <div class="info-card">
+          <h3>App Clínica Veterinária</h3>
+          <p>Aplicativo desktop para gestão veterinária.</p>
+        </div>
+      </div>
+
+      <div class="card-projeto animar-scroll" 
+           data-titulo="Tela de login" 
+           data-gif="logingif.gif" 
+           data-site="https://caike-santos.github.io/projeto-login/" 
+           data-github="https://github.com/caike-santos/projeto-login">
+        
+        <div class="imagem-card">
+          <img src="login.png" alt="Capa tela de login">
+        </div>
+        <div class="info-card">
+          <h3>Tela de Login</h3>
+          <p>Tela responsiva para login</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="curriculos" class="secao-curriculos">
+    <h2 class="titulo-projetos">Meus Certificados</h2>
+    <div class="grid-curriculos">
+      
+      <div class="card-curriculo animar-scroll" 
+           data-titulo="Introdução à Cibersegurança" 
+           data-foto="curriculo-web.png" 
+           data-info="Certificação focada em noções básicas de segurança cibernética para proteção digital e análise dos maiores desafios de segurança enfrentados por empresas e instituições.">
+        <div class="imagem-card">
+          <img src="certificados/1784059074059-251a60fa-1112-4757-bf56-d716c69386e9_1.jpg" alt="Certificado de Cibersegurança">
+        </div>
+        <div class="info-card">
+          <h3>Introdução à Cibersegurança</h3>
+          <p>Conceitos de proteção digital e desafios de segurança na atualidade.</p>
+        </div>
+      </div>
+
+      <div class="card-curriculo animar-scroll" 
+           data-titulo="Fundamentos em Redes" 
+           data-foto="certificados/1784059113316-b91f9693-ac02-4eec-a023-81a46c288562_1.jpg" 
+           data-info="Certificação com foco em funções de suporte em redes, help desk e práticas recomendadas de suporte técnico utilizando metodologias eficazes.">
+        <div class="imagem-card">
+          <img src="certificados/1784059113316-b91f9693-ac02-4eec-a023-81a46c288562_1.jpg" alt="Certificado de Fundamentos em Redes">
+        </div>
+        <div class="info-card">
+          <h3>Fundamentos em Redes</h3>
+          <p>Habilidades em solução de problemas e melhores práticas de suporte de TI.</p>
+        </div>
+      </div>
+
+       <div class="card-curriculo animar-scroll" 
+            data-titulo="PHP Básico" 
+            data-foto="certificados/CAIKE-DOS-SANTOS-PHP-Basico-40-Horas-Certificado-Curso-em-Video (1)_page-0001.jpg" 
+            data-info="Conceitos essenciais como variáveis, operadores e estruturas lógicas, demonstrando na prática o funcionamento do PHP e sua integração com o HTML5.">
+        <div class="imagem-card">
+          <img src="certificados/CAIKE-DOS-SANTOS-PHP-Basico-40-Horas-Certificado-Curso-em-Video (1)_page-0001.jpg" alt="Certificado PHP Básico">
+        </div>
+        <div class="info-card">
+          <h3>PHP Básico</h3>
+          <p>Fundamentos da linguagem e integração dinâmica com páginas web.</p>
+        </div>
+      </div>
+
+      <div class="card-curriculo animar-scroll" 
+           data-titulo="PHP Orientado a Objetos" 
+           data-foto="certificados/CAIKE-DOS-SANTOS-PHP-POO-40-Horas-Certificado-Curso-em-Video_page-0001.jpg" 
+           data-info="Aplicação prática dos pilares da POO: classes, objetos, encapsulamento, herança e polimorfismo para construir soluções limpas e sustentáveis.">
+        <div class="imagem-card">
+          <img src="certificados/CAIKE-DOS-SANTOS-PHP-POO-40-Horas-Certificado-Curso-em-Video_page-0001.jpg" alt="Certificado PHP Orientado a Objetos">
+        </div>
+        <div class="info-card">
+          <h3>PHP Orientado a Objetos</h3>
+          <p>Criação e manipulação de objetos para sistemas flexíveis e reutilizáveis.</p>
+        </div>
+      </div>
+
+      <div class="card-curriculo animar-scroll" 
+           data-titulo="GitHub Codespaces" 
+           data-foto="certificados/github_codespaces_turma_mai2026_certificado-imagens-0 (1).jpg" 
+           data-info="Certificação focada em aumentar a produtividade no desenvolvimento de software através da configuração e uso de ambientes baseados em nuvem.">
+        <div class="imagem-card">
+          <img src="certificados/github_codespaces_turma_mai2026_certificado-imagens-0 (1).jpg" alt="Certificado GitHub Codespaces">
+        </div>
+        <div class="info-card">
+          <h3>GitHub Codespaces</h3>
+          <p>Desenvolvimento em ambientes baseados em nuvem para maior flexibilidade.</p>
+        </div>
+      </div>
+
+      <div class="card-curriculo animar-scroll" 
+           data-titulo="GitHub Copilot" 
+           data-foto="certificados/github_copilot_turma_abr2026_certificado_page-0001.jpg" 
+           data-info="Configuração e uso do GitHub Copilot com foco em engenharia de prompts e integração de LLMs no dia a dia do desenvolvimento de software.">
+        <div class="imagem-card">
+          <img src="certificados/github_copilot_turma_abr2026_certificado_page-0001.jpg" alt="Certificado GitHub Copilot">
+        </div>
+        <div class="info-card">
+          <h3>GitHub Copilot</h3>
+          <p>Uso prático de inteligência artificial para otimização da programação.</p>
+        </div>
+      </div>
+
+      <div class="card-curriculo animar-scroll" 
+           data-titulo="GitHub Actions" 
+           data-foto="certificados/1784059276330-97b74477-fc90-4a07-a152-fee4f889ef5b_1.jpg" 
+           data-info="Automação de fluxos de trabalho de desenvolvimento. Apresenta a configuração e disparo de automações com eventos, jobs e workflows práticos.">
+        <div class="imagem-card">
+          <img src="certificados/1784059276330-97b74477-fc90-4a07-a152-fee4f889ef5b_1.jpg" alt="Certificado GitHub Actions">
+        </div>
+        <div class="info-card">
+          <h3>GitHub Actions</h3>
+          <p>Automação e criação de workflows integrados para desenvolvimento.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="habilidades" class="secao-habilidades">
+  <h2 class="titulo-projetos">Minhas Habilidades</h2>
+
+  <div class="grid-habilidades">
+    <div class="habilidade-card animar-scroll">
+      <div class="habilidade-icone">⚡</div>
+      <h3>HTML</h3>
+      <p>Coloque o ícone e o nome da sua habilidade aqui.</p>
+    </div>
+
+    <div class="habilidade-card animar-scroll">
+      <div class="habilidade-icone">🎨</div>
+      <h3>CSS</h3>
+      <p>Coloque o ícone e o nome da sua habilidade aqui.</p>
+    </div>
+
+    <div class="habilidade-card animar-scroll">
+      <div class="habilidade-icone">⚙️</div>
+      <h3>JavaScript</h3>
+      <p>Coloque o ícone e o nome da sua habilidade aqui.</p>
+    </div>
+
+    <div class="habilidade-card animar-scroll">
+      <div class="habilidade-icone">🧠</div>
+      <h3>PHP</h3>
+      <p>Coloque o ícone e o nome da sua habilidade aqui.</p>
+    </div>
+  </div>
+</section>
+
+  <div id="modal-projeto" class="modal">
+    <div class="modal-conteudo">
+      <span class="fechar-modal" title="Fechar">&times;</span>
+      <h3 id="modal-titulo">Título do Projeto</h3>
+      <div class="modal-gif-container">
+        <img id="modal-gif" src="" alt="Demonstração do projeto">
+      </div>
+      <div class="modal-botoes">
+        <a id="modal-link-site" href="#" target="_blank" rel="noopener noreferrer" class="btn-modal principal">Ver Projeto Online</a>
+        <a id="modal-link-github" href="#" target="_blank" rel="noopener noreferrer" class="btn-modal secundario">Ver no GitHub</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="modal-curriculo" class="modal modal-curriculo">
+    <div class="modal-conteudo modal-curriculo-conteudo">
+      <span class="fechar-modal fechar-curriculo" title="Fechar">&times;</span>
+      <h3 id="modal-curriculo-titulo">Título do Certificado</h3>
+      <div class="modal-foto-container">
+        <img id="modal-curriculo-foto" src="#" alt="Visualização do certificado">
+      </div>
+      <p id="modal-curriculo-info"></p>
+    </div>
+  </div>
+
+  <button class="seta-navegacao seta-cima" data-direcao="-1" aria-label="Ir para seção anterior">▲</button>
+  <button class="seta-navegacao seta-baixo" data-direcao="1" aria-label="Ir para próxima seção">▼</button>
 </body>
 </html>
