@@ -78,7 +78,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const iniciarTexto = () => {
     setTimeout(() => {
-      // Revela os blocos
       conteudoPrincipal.style.opacity = "1";
       conteudoPrincipal.style.transform = "translateY(0)";
       blocoApresentacao.style.opacity = "1";
@@ -86,21 +85,18 @@ document.addEventListener("DOMContentLoaded", () => {
       blocoFoto.style.opacity = "1";
       blocoFoto.style.transform = "translateY(0)";
 
-      // Título: Lento e imponente (80ms)
-      digitarTexto(tituloPrincipal, textoTitulo, 80); 
-      
-      // Subtítulo: Começa após 1.5s, velocidade média (60ms)
+      themeToggle.classList.add("visivel");
+      const menuAparecer = document.getElementById("menu-toggle");
+      if (menuAparecer) menuAparecer.classList.add("visivel");
+
+      digitarTexto(tituloPrincipal, textoTitulo, 80);
       setTimeout(() => digitarTexto(subtituloPrincipal, textoSubtitulo, 60), 1500);
-      
-      // Localização: Começa após 4s, velocidade um pouco mais rápida (40ms)
       setTimeout(() => digitarTexto(localizacao, textoLocal, 40), 4000);
       
-      // Botões: Só aparecem quando tudo terminar (após 5.5s)
       setTimeout(() => {
         heroExtras.style.opacity = "1";
       }, 5500);
-
-    }, 3000); // Começa logo após o vídeo carregar (300ms de margem)
+    }, 3000);
   };
 
   
@@ -168,21 +164,6 @@ document.addEventListener("DOMContentLoaded", () => {
     temaAtivo = !temaAtivo;
     aplicarTema();
 
-    // Pega o ícone
-    const iconeTema = themeToggle.querySelector(".theme-icon");
-    
-    // 1. Faz o ícone "encolher", girar e sumir rapidamente
-    iconeTema.style.transform = "rotate(90deg) scale(0.3)";
-    iconeTema.style.opacity = "0";
-
-    // 2. Aguarda um pentelhésimo de segundo para trocar o emoji e voltar girando
-    setTimeout(() => {
-      iconeTema.textContent = temaAtivo ? "🌙" : "☀️";
-      iconeTema.style.transform = "rotate(0deg) scale(1)";
-      iconeTema.style.opacity = "1";
-    }, 250);
-
-    // Lógica do vídeo que você já tem...
     const videoAtual = getVideoAtivo();
     const videoAnterior = temaAtivo ? videoInterativo : videoInterativoAlternativo;
 
