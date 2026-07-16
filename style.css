@@ -1322,12 +1322,11 @@ body.tema-claro .menu-links a:hover { color: #BB3427; }
    SEÇÃO DE CONTATOS
    ========================================= */
 .secao-contatos {
-  padding: 80px 8% 40px;
-  min-height: 100vh; /* Força a ocupar a tela toda */
-  height: 100vh;     /* Força a ocupar a tela toda */
+  padding: 120px 8% 60px; /* Aumentamos o topo para 120px para descer o título */
+  min-height: 100vh; /* Mantemos apenas o min-height. APAGAMOS o height: 100vh; */
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Centraliza no meio da tela */
+  justify-content: center;
   align-items: center;
   position: relative;
   z-index: 20;
@@ -1436,5 +1435,10 @@ body.tema-claro .card-contato:hover .contato-icone { color: white; }
 }
 @media (max-width: 768px) {
   .grid-contatos { grid-template-columns: 1fr; }
+
+  .titulo-contatos {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
 }
 
