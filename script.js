@@ -211,7 +211,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const secaoHabilidades = document.getElementById('habilidades');
   const navegacaoSecoes = document.querySelector('.navegacao-secoes');
   const setasNavegacao = document.querySelectorAll('.seta-navegacao');
-  const secoesNavegacao = [secaoInicial, secaoSobre, secaoProjetos, secaoCurriculos, secaoHabilidades].filter(Boolean);
+  const secaoContato = document.getElementById('contato');
+  const secoesNavegacao = [secaoInicial, secaoSobre, secaoProjetos, secaoCurriculos, secaoHabilidades, secaoContato].filter(Boolean);
 
   const transicionarParaSecao = (elemento) => {
     if (!elemento) return;
@@ -276,7 +277,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }, { threshold: 0.6 }); // Dispara quando 60% do final aparecer
   
-  if (secaoHabilidades) observerFinal.observe(secaoHabilidades);
+if (secaoContato) observerFinal.observe(secaoContato);
 
   
 
@@ -324,6 +325,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const secaoCurriculosGlow = document.getElementById('curriculos');
   const secaoHabilidadesGlow = document.getElementById('habilidades');
   const secaoSobreGlow = document.getElementById('sobre');
+  const secaoContatoGlow = document.getElementById('contato');
 
   const criarSpark = (section, event) => {
     if (!section) return;
@@ -368,6 +370,7 @@ document.addEventListener("DOMContentLoaded", () => {
   adicionarEfeitoEstrelas(secaoCurriculosGlow);
   adicionarEfeitoEstrelas(secaoHabilidadesGlow);
   adicionarEfeitoEstrelas(secaoSobreGlow);
+  adicionarEfeitoEstrelas(secaoContatoGlow);
 
   const observerSecaoProjetos = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
