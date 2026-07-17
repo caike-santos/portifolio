@@ -212,7 +212,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const navegacaoSecoes = document.querySelector('.navegacao-secoes');
   const setasNavegacao = document.querySelectorAll('.seta-navegacao');
   const secaoContato = document.getElementById('contato');
-  const secoesNavegacao = [secaoInicial, secaoSobre, secaoProjetos, secaoCurriculos, secaoHabilidades, secaoContato].filter(Boolean);
+  const secaoFinal = document.getElementById('conversa');
+  const secoesNavegacao = [secaoInicial, secaoSobre, secaoProjetos, secaoCurriculos, secaoHabilidades, secaoContato, secaoFinal].filter(Boolean);
 
   const transicionarParaSecao = (elemento) => {
     if (!elemento) return;
@@ -277,7 +278,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }, { threshold: 0.6 }); // Dispara quando 60% do final aparecer
   
-if (secaoContato) observerFinal.observe(secaoContato);
+if (secaoFinal) observerFinal.observe(secaoFinal);
 
   
 
@@ -326,6 +327,7 @@ if (secaoContato) observerFinal.observe(secaoContato);
   const secaoHabilidadesGlow = document.getElementById('habilidades');
   const secaoSobreGlow = document.getElementById('sobre');
   const secaoContatoGlow = document.getElementById('contato');
+  const secaoFinalGlow = document.getElementById('conversa');
 
   const criarSpark = (section, event) => {
     if (!section) return;
@@ -371,6 +373,7 @@ if (secaoContato) observerFinal.observe(secaoContato);
   adicionarEfeitoEstrelas(secaoHabilidadesGlow);
   adicionarEfeitoEstrelas(secaoSobreGlow);
   adicionarEfeitoEstrelas(secaoContatoGlow);
+  adicionarEfeitoEstrelas(secaoFinalGlow);
 
   const observerSecaoProjetos = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -482,6 +485,18 @@ if (secaoContato) observerFinal.observe(secaoContato);
       modalGif.src = "";
     }
   });
+
+  // --- BOTÃO VOLTAR AO TOPO ---
+  const btnVoltarTopo = document.getElementById("btn-voltar-topo");
+  
+  if (btnVoltarTopo) {
+    btnVoltarTopo.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
+  }
 });
 
 // --- LÓGICA DO MENU FULLSCREEN ---

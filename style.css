@@ -3,15 +3,15 @@
   box-sizing: border-box;
 }
 
+
 body, html {
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
-  /* Aplica a Inter no site todo por padrão */
-  font-family: 'Inter', sans-serif; 
+  overflow-x: hidden; /* Mantém bloqueada a barra horizontal */
+  overflow-y: scroll; /* Deixa a barra vertical sempre fixa para evitar os "pulos" da tela */
   transition: background-color 0.6s ease, color 0.6s ease;
+  font-family: 'Inter', sans-serif; 
 }
-
 /* Aplica a Space Grotesk apenas nos títulos, botões e IDs específicos */
 h1, h2, h3, 
 #titulo-principal, 
@@ -300,6 +300,7 @@ video {
   border: 8px solid #BB3427;
   box-shadow: 0 0 35px rgba(187, 52, 39, 0.45);
   transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  background-color: black;
 }
 
 
@@ -430,7 +431,8 @@ body.tema-claro .habilidade-card:hover {
 .secao-curriculos::before,
 .secao-habilidades::before,
 .secao-sobre::before ,
-.secao-contatos::before{ 
+.secao-contatos::before,
+.tela-final::before{ 
   content: "";
   position: absolute;
   inset: 0;
@@ -447,12 +449,14 @@ body.tema-claro .habilidade-card:hover {
 .secao-curriculos:hover::before,
 .secao-habilidades:hover::before,
 .secao-sobre:hover::before,
-.secao-contatos:hover::before, /* <-- Adicionado aqui */
+.secao-contatos:hover::before,
+.tela-final:hover::before, /* <-- Adicionado aqui */
 .secao-projetos.estrelas-ativas::before,
 .secao-curriculos.estrelas-ativas::before,
 .secao-habilidades.estrelas-ativas::before,
 .secao-contatos.estrelas-ativas::before,
-.secao-sobre.estrelas-ativas::before{ /* <-- Adicionado aqui */
+.secao-sobre.estrelas-ativas::before,
+.tela-final.estrelas-ativas::before{ /* <-- Adicionado aqui */
   opacity: 1;
 }
 
@@ -460,7 +464,9 @@ body.tema-claro .habilidade-card:hover {
 body.tema-claro .secao-projetos::before,
 body.tema-claro .secao-curriculos::before,
 body.tema-claro .secao-habilidades::before,
-body.tema-claro .secao-sobre::before { /* <-- Adicionado aqui */
+body.tema-claro .secao-sobre::before,
+body.tema-claro .secao-contatos::before,
+body.tema-claro .tela-final::before{ /* <-- Adicionado aqui */
   background:
     radial-gradient(circle at center, rgba(255,255,255,0.72), transparent 58%),
     linear-gradient(180deg, rgba(0,0,0,0.025), rgba(0,0,0,0));
@@ -1441,4 +1447,244 @@ body.tema-claro .card-contato:hover .contato-icone { color: white; }
     margin-bottom: 2rem;
   }
 }
+
+/* --- FOOTER --- */
+.rodape-site {
+  width: 100%;
+  padding: 2rem 5% 2rem; 
+  box-sizing: border-box;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+body.tema-claro .rodape-site {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* --- LAYOUT DO RODAPÉ (FOTO GRANDE + INFO) --- */
+
+.rodape-conteudo {
+  display: flex;
+  justify-content: space-between; /* Isso cria o espaço vazio no meio */
+  align-items: center;
+  margin-bottom: 2.5rem;
+}
+
+.rodape-perfil {
+  display: flex;
+  align-items: center; /* Mantém a foto e o bloco de texto alinhados ao centro */
+  gap: 3.5rem; /* Espaçamento entre a foto grande e as informações */
+}
+
+/* Estilo da Fotografia Grande */
+.foto-grande-footer {
+  width: 130px; /* Ajusta o tamanho como preferires */
+  height: 130px;
+  border-radius: 50%; /* Deixa a imagem redonda */
+  object-fit: cover;
+  border: 3px solid rgba(255, 255, 255, 0.1); /* Borda subtil (podes mudar para #BB3427 se quiseres destaque) */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.foto-grande-footer:hover {
+  transform: scale(1.05); /* Efeito de zoom suave ao passar o rato */
+}
+
+/* Agrupamento das informações (Logo + Redes) */
+.rodape-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem; /* Espaço entre o nome e os links das redes */
+}
+
+.textos-logo h3 {
+  font-size: 1.6rem;
+  margin: 0 0 0.2rem 0;
+  letter-spacing: 1px;
+}
+
+.textos-logo h3 span {
+  color: #BB3427;
+}
+
+.textos-logo p {
+  margin: 0;
+  opacity: 0.7;
+  font-size: 0.9rem;
+}
+
+.rodape-redes {
+  display: flex;
+  gap: 2rem;
+  margin-top: 0.5rem
+}
+
+.rodape-redes a {
+  color: inherit;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  opacity: 0.8;
+  transition: opacity 0.3s ease, color 0.3s ease;
+}
+
+.rodape-redes a:hover {
+  opacity: 1;
+  color: #BB3427;
+}
+
+/* Ajustes para dispositivos móveis */
+@media (max-width: 768px) {
+  .rodape-conteudo {
+    flex-direction: column;
+    text-align: center;
+    gap: 2rem; /* Adiciona espaço entre a foto e os links sociais */
+  }
+  
+  .rodape-perfil {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .rodape-bottom {
+    flex-direction: column-reverse;
+    gap: 1.5rem;
+    text-align: center;
+  }
+}
+
+
+
+/* --- CÓDIGO PARA SEPARAR O COPYRIGHT DO BOTÃO --- */
+.rodape-bottom {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center; /* <-- Linha removida */
+  margin-top: 1rem; 
+  width: 100%;
+}
+
+.rodape-bottom p {
+  margin: 0;
+}
+
+#btn-voltar-topo {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: color 0.3s ease;
+}
+
+#btn-voltar-topo:hover {
+  color: #BB3427;
+}
+
+/* Ajustes para telas de celular */
+@media (max-width: 768px) {
+  .rodape-conteudo {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .rodape-bottom {
+    flex-direction: column-reverse;
+    gap: 1.5rem;
+    text-align: center;
+  }
+}
+
+.tela-final {
+  min-height: 100vh; /* Garante que o bloco ocupe 1 tela inteira */
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 20;
+  overflow: hidden;
+}
+
+/* --- SEÇÃO DE CONTATO --- */
+.secao-contato {
+  flex: 1; /* Faz o contato crescer e ocupar todo o espaço que sobrar do footer */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 10%;
+}
+
+.secao-contato h2 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.secao-contato p {
+  margin-bottom: 2rem;
+  opacity: 0.8;
+  text-align: center;
+}
+
+.formulario-contato {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 500px;
+  gap: 1rem;
+}
+
+.formulario-contato input,
+.formulario-contato textarea {
+  background: rgba(25, 25, 25, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+  border-radius: 8px;
+  color: white;
+  font-family: inherit;
+  backdrop-filter: blur(10px);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  font-size: 1rem;
+}
+
+body.tema-claro .formulario-contato input,
+body.tema-claro .formulario-contato textarea {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: #111;
+}
+
+.formulario-contato input::placeholder,
+.formulario-contato textarea::placeholder {
+  color: rgba(255, 255, 255, 0.5); /* Branco com 50% de transparência */
+}
+
+.formulario-contato input:focus,
+.formulario-contato textarea:focus {
+  outline: none;
+  border-color: #BB3427; /* Cor de destaque ao clicar no campo */
+  box-shadow: 0 0 8px rgba(187, 52, 39, 0.4);
+}
+
+.btn-enviar {
+  background-color: #BB3427;
+  color: white;
+  border: none;
+  padding: 1rem;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-top: 0.5rem;
+}
+
+.btn-enviar:hover {
+  background-color: #d13d2f;
+  transform: translateY(-2px);
+}
+
 
