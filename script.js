@@ -497,6 +497,62 @@ if (secaoFinal) observerFinal.observe(secaoFinal);
       });
     });
   }
+
+  // --- LÓGICA DO FORMULÁRIO DE CONTATO (COM SPINNER) ---
+  const formContato = document.getElementById("form-contato");
+  const btnEnviar = document.getElementById("btn-enviar");
+  const btnTexto = document.querySelector(".btn-texto");
+  const btnSpinner = document.getElementById("btn-spinner");
+
+  if (formContato) {
+    formContato.addEventListener("submit", (e) => {
+      e.preventDefault(); 
+
+      // 1. ESTADO DE CARREGAMENTO (Inicia o Spinner)
+      btnTexto.textContent = "Enviando...";
+      btnSpinner.style.display = "block"; // Mostra a rodinha
+      btnEnviar.disabled = true; 
+      btnEnviar.style.opacity = "0.8";
+
+      const formData = new FormData(formContato);
+
+      // Envia os dados
+      fetch("https://formsubmit.co/ajax/caikecarioca@gmail.com", {
+        method: "POST",
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        // 2. SUCESSO (Para o Spinner)
+        btnSpinner.style.display = "none";
+        btnTexto.textContent = "Mensagem Enviada! ✓";
+        btnEnviar.style.backgroundColor = "#28a745"; // Verde
+        btnEnviar.style.opacity = "1";
+        
+        formContato.reset(); 
+
+        // Volta ao normal depois de 4 segundos
+        setTimeout(() => {
+          btnTexto.textContent = "Enviar Mensagem";
+          btnEnviar.style.backgroundColor = ""; 
+          btnEnviar.disabled = false;
+        }, 4000);
+      })
+      .catch(error => {
+        // 3. ERRO (Para o Spinner)
+        btnSpinner.style.display = "none";
+        btnTexto.textContent = "Erro ao enviar ✕";
+        btnEnviar.style.backgroundColor = "#dc3545"; // Vermelho escuro
+        btnEnviar.style.opacity = "1";
+
+        setTimeout(() => {
+          btnTexto.textContent = "Enviar Mensagem";
+          btnEnviar.style.backgroundColor = "";
+          btnEnviar.disabled = false;
+        }, 4000);
+      });
+    });
+  }
 });
 
 // --- LÓGICA DO MENU FULLSCREEN ---

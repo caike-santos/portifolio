@@ -405,11 +405,17 @@
       <h2>Vamos conversar?</h2>
       <p>Estou sempre aberto a novas oportunidades e desafios.</p>
       
-      <form class="formulario-contato">
-        <input type="text" placeholder="Seu nome" required />
-        <input type="email" placeholder="Seu e-mail" required />
-        <textarea placeholder="Sua mensagem..." rows="4" required></textarea>
-        <button type="submit" class="btn-enviar">Enviar Mensagem</button>
+      <form class="formulario-contato" id="form-contato">
+        <input type="text" name="nome" placeholder="Seu nome" required />
+        <input type="email" name="email" placeholder="Seu e-mail" required />
+        <textarea name="mensagem" placeholder="Sua mensagem..." rows="4" required></textarea>
+        
+        <input type="hidden" name="_captcha" value="false">
+        
+        <button type="submit" class="btn-enviar" id="btn-enviar">
+          <span class="btn-texto">Enviar Mensagem</span>
+          <span class="btn-spinner" id="btn-spinner"></span>
+        </button>
       </form>
     </section>
 

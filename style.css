@@ -1687,4 +1687,28 @@ body.tema-claro .formulario-contato textarea {
   transform: translateY(-2px);
 }
 
+/* --- SPINNER DE CARREGAMENTO DO BOTÃO --- */
+.btn-enviar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px; /* Espaço entre o texto e o spinner */
+}
+
+.btn-spinner {
+  display: none; /* Fica invisível por padrão */
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #ffffff; /* Cor da ponta do spinner */
+  border-radius: 50%;
+  animation: girarSpinner 0.8s linear infinite;
+}
+
+/* A animação de rotação infinita */
+@keyframes girarSpinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
 
